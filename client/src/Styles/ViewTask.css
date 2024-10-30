@@ -1,0 +1,110 @@
+/* ViewTask.css */
+
+.view-task-container {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.view-task-header {
+  font-size: 1.8rem;
+  color: #1a1a2e;
+  margin-bottom: 5rem;
+  text-align: center;
+}
+
+.view-task-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.view-task-details {
+  margin-top: 1rem;
+}
+
+.view-task-title,
+.view-task-description,
+.view-task-date,
+.view-task-status {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+.view-task-title {
+  font-size: larger;
+  font-weight: 700;
+}
+
+.view-task-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.view-task-input,
+.view-task-textarea,
+.view-task-datetime,
+.view-task-status {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.view-task-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.view-task-edit-button,
+.view-task-delete-button,
+.view-task-save-button,
+.view-task-cancel-button {
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-task-edit-button {
+  background-color: #3498db;
+}
+
+.view-task-delete-button {
+  background-color: #e74c3c;
+}
+
+.view-task-save-button {
+  background-color: #2ecc71;
+}
+
+.view-task-cancel-button {
+  background-color: #95a5a6;
+}
+
+.view-task-edit-button:hover,
+.view-task-delete-button:hover,
+.view-task-save-button:hover,
+.view-task-cancel-button:hover {
+  opacity: 0.9;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px; 
+  left: 20px; 
+  cursor: pointer;
+  width: 30px; 
+  height: 30px; 
+}

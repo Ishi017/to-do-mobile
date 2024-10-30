@@ -1,0 +1,111 @@
+.home-banner{
+    background-color: #4466ed;
+   height:600px;
+   width:auto;
+}
+
+.home-container{
+    height:292px;
+    position: absolute;
+    bottom: 0;
+    padding: 1.1rem 1.2rem 1.5rem 1.3rem;
+}
+
+.home-container h2{
+font-weight:600;
+font-size:24px;
+line-height: 36px;
+margin-bottom: 1rem;
+}
+
+.home-container p{
+    font-weight:400;
+    font-size:12px;
+    line-height: 18px;
+    color: #717171;
+    padding-right: 3rem;
+}
+
+ .home-button{
+   position: absolute;
+   align-self: center;
+   bottom:10px;
+   cursor: pointer;
+   /* left:0.3rem; */
+   width: 362px;
+   height: 48px;
+   background-color: #4466ed;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.home-button button{
+    color: white;
+    font-weight: 400;
+}
+
+.vect1 {
+    position: absolute;
+    top: 120px;
+}
+
+.vect2 {
+    position: absolute; /* Change to absolute positioning */
+    top: 430px; /* Align to top */
+    right: 0; /* Align to rightmost */
+}
+
+.ellipses{
+    position: absolute; /* Change to absolute positioning */
+    top:1px; /* Align to top */
+    right: 1px;
+    height:10px; }
+
+
+
+@media (max-height: 884px) {
+    .home-banner {
+        height: 580px; 
+    }
+
+    .home-container {
+        height: 260px; 
+    }
+}
+
+@media (max-height: 816px) {
+    .home-banner {
+        height: 570px;
+    }
+
+    .home-container {
+        height: 250px;
+        padding: 0.8rem; /* Adjust padding for smaller screens */
+    }
+}
+
+@media (max-height: 796px) {
+    .home-banner {
+        height: 550px;
+    }
+
+    .home-container {
+        height: 230px;
+        padding: 0.8rem; 
+    }
+}
+
+@media (max-height: 760px) {
+    .home-banner {
+        height: 470px;
+    }
+
+    .home-container {
+        height:200px;
+        padding: 0.8rem; 
+    }
+    .vect2 {
+        top: 370px; /* Align to top */
+    }
+}

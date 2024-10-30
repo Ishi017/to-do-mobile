@@ -1,0 +1,88 @@
+.task-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+.task-popup-content {
+    background: white;
+    width: 100%;
+    max-width: 600px;
+    min-height: 580px ;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    /* border-radius: 8px; */
+}
+
+.task-popup-heading {
+    margin: 0 10px 20px 0;
+}
+
+.task-popup-form {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.task-popup-field {
+    margin-bottom: 15px;
+}
+
+.task-popup-label {
+    margin-bottom: 5px;
+    color: rgb(146, 143, 143);
+    font-size: 13px;
+}
+
+.task-popup-input,
+.task-popup-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.task-popup-textarea{
+    height: 100px;
+}
+
+.taskpopup-time{
+    display: flex;
+    gap: 20px;
+}
+
+.task-popup-textarea {
+    resize: vertical;
+}
+
+.task-popup-submit-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: #4566EC;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.task-popup-submit-button:hover {
+    background: #3549B2;
+}
+
+
+.task-popup-close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 20px;
+    height: 25px;
+    cursor: pointer;
+}

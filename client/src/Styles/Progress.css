@@ -1,0 +1,48 @@
+.weekly-progress-container {
+    width: 100%;
+    max-width: 362px;
+    margin: 0 auto;
+    height: auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.weekly-progress-text {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #000000;
+    margin-bottom: 8px;
+}
+
+.progress-background {
+    width: 100%;
+    height: 24px;
+    background: #DADAFF;
+}
+
+.progress-bar {
+    width: 70%;
+    height: 100%;
+    background: #253C98;
+}
+
+@media (max-width: 360px) {
+    .weekly-progress-container {
+        max-width: 280px;
+    }
+
+    .weekly-progress-text {
+        font-size: 16px;
+    }
+
+    .progress-background {
+        height: 20px;
+    }
+
+    .progress-bar {
+        width: 80%;
+    }
+}
