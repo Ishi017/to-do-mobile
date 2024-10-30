@@ -1,42 +1,39 @@
+import dotenv from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import methodOverride from "method-override";
-import dotenv from "dotenv"; 
 import Task from "./models/taskModel.js";
-import cors from "cors"; 
-const frontendUrl = process.env.FRONTEND_URL;
+import cors from "cors";
 
-dotenv.config(); 
+// Load environment variables
+dotenv.config();
 
 const app = express();
-const port = 8080;
-
+const port = process.env.PORT || 8080;
 const dbUrl = process.env.ATLASDB_URL;
+const frontendUrl = process.env.FRONTEND_URL;
 
+// Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-app.use(
-    cors({
-        origin: frontendUrl, 
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-    })
-);
+// CORS configuration
+app.use(cors());
 
-
+// Connect to MongoDB
 async function main() {
     try {
-        await mongoose.connect(dbUrl); // Connect to MongoDB
+        await mongoose.connect(dbUrl); // Removed deprecated options
         console.log("Connected to MongoDB");
     } catch (err) {
         console.error("Error connecting to MongoDB:", err);
     }
 }
 
-main(); 
+main();
 
+// Routes
 app.get("/tasks", async (req, res) => {
     try {
         const tasks = await Task.find(); // Fetch all tasks
@@ -63,11 +60,9 @@ app.get('/tasks/:id', async (req, res) => {
     }
 });
 
+// Create a new Task
 app.post('/tasks', async (req, res) => {
     const { title, description, dateTime } = req.body;
-
-    // Check for undefined values
-    console.log('Received task:', req.body);
 
     try {
         const task = new Task({
@@ -86,11 +81,11 @@ app.post('/tasks', async (req, res) => {
 // Update Task by ID
 app.put('/tasks/:id', async (req, res) => {
     const { id } = req.params;
-    const { title, description, dateTime, status } = req.body; 
+    const { title, description, dateTime, status } = req.body;
 
     try {
-        const task = await Task.findByIdAndUpdate(id, { title, description, dateTime, status }, { new: true }); // Update all fields
-        res.json(task); // Return the updated task
+        const task = await Task.findByIdAndUpdate(id, { title, description, dateTime, status }, { new: true });
+        res.json(task);
     } catch (error) {
         console.error('Error updating task:', error);
         res.status(500).json({ message: 'Error updating task', error });
@@ -110,11 +105,12 @@ app.delete('/tasks/:id', async (req, res) => {
     }
 });
 
+// Root route
 app.get("/", (req, res) => {
-    console.log("hi"); 
-    res.send("Hello World!"); 
+    res.send("Hello World!");
 });
 
+// Start server
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
