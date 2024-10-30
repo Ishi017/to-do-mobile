@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 const dbUrl = process.env.ATLASDB_URL;
-const frontendUrl = process.env.FRONTEND_URL;
+// const frontendUrl = process.env.FRONTEND_URL;
 
 // Middleware
 app.use(express.json());
@@ -19,17 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 // Enable CORS
-const allowedOrigins = [
-    'https://to-do-app-mobile-frontend.vercel.app', // Your Vercel frontend
-    'http://localhost:3000', // Your local development (if needed)
-  ];
-  
-  app.use(cors({
-    origin: allowedOrigins, // Allow these origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
-    credentials: true, // Allow credentials (optional)
-  }));
-
+app.use(
+    cors({
+      origin: process.env.FRONTEND_URL,
+      credentials: true,
+    })
+  );
 
 // Connect to MongoDB
 async function main() {
@@ -117,8 +112,8 @@ app.delete('/tasks/:id', async (req, res) => {
 
 // Root route
 app.get("/", (req, res) => {
-    res.send("Hello World!");
-});
+    res.send("Welcome to the application!");
+  });
 
 // Start server
 app.listen(port, () => {

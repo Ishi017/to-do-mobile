@@ -1,13 +1,13 @@
 
-const API_URL = process.env.REACT_APP_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const fetchTodos = async () => {
-    const response = await fetch(`${API_URL}/todos`);
+    const response = await fetch(`${apiUrl}/todos`);
     return response.json();
 };
 
 export const addTodo = async (todo) => {
-    const response = await fetch(`${API_URL}/todos`, {
+    const response = await fetch(`${apiUrl}/todos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(todo),
@@ -16,11 +16,11 @@ export const addTodo = async (todo) => {
 };
 
 export const deleteTodo = async (id) => {
-    await fetch(`${API_URL}/todos/${id}`, { method: "DELETE" });
+    await fetch(`${apiUrl}/todos/${id}`, { method: "DELETE" });
 };
 
 export const updateTodo = async (id, updatedFields) => {
-    const response = await fetch(`${API_URL}/todos/${id}`, {
+    const response = await fetch(`${apiUrl}/todos/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedFields),
