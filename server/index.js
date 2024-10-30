@@ -18,13 +18,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-// CORS configuration
-app.use(
-    cors({
-      origin: frontendUrl,
-      credentials: true,
-    })
-  );
+// Enable CORS
+const allowedOrigins = [
+    'https://to-do-app-mobile-frontend.vercel.app', // Your Vercel frontend
+    'http://localhost:3000', // Your local development (if needed)
+  ];
+  
+  app.use(cors({
+    origin: allowedOrigins, // Allow these origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+    credentials: true, // Allow credentials (optional)
+  }));
 
 
 // Connect to MongoDB
