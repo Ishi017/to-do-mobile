@@ -19,7 +19,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
 // CORS configuration
-app.use(cors());
+const corsOptions = {
+    origin: [frontendUrl, 'http://localhost:3000'],// Allow only your frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+    credentials: true, // Allow credentials (like cookies or authorization headers)
+};
+
+app.use(cors(corsOptions));
 
 // Connect to MongoDB
 async function main() {
