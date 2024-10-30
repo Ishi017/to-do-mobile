@@ -25,7 +25,9 @@ const TaskList = () => {
 
     fetchTasks();
   }, []);
+  console.log("API URL:", import.meta.env.VITE_API_URL);
 
+  
   const handleEditClick = (task) => {
     setEditTaskId(task._id);
     const formattedDateTime = new Date(task.dateTime).toISOString().slice(0, 16);

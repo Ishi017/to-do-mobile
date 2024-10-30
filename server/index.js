@@ -5,11 +5,7 @@ import dotenv from "dotenv";
 import Task from "./models/taskModel.js";
 import cors from "cors"; 
 
-
-
 dotenv.config(); 
-
-
 
 const app = express();
 const port = 8080;
@@ -23,7 +19,7 @@ app.use(methodOverride('_method'));
 app.use(
     cors({
       origin: '*',
-      credentials: true,
+    //   credentials: true,
     }))
 
 async function main() {
