@@ -22,7 +22,7 @@ app.use(methodOverride('_method'));
 
 app.use(
     cors({
-      origin: process.env.FRONTEND_LINK,
+      origin: '*',
       credentials: true,
     }))
 
