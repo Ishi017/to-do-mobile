@@ -21,7 +21,7 @@ const ViewTask = () => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/tasks`);
+        const response = await axios.get(`${apiUrl}/tasks/${id}`);
         setTask(response.data);
         setFormData({
           title: response.data.title,
@@ -46,7 +46,7 @@ const ViewTask = () => {
   // Handle save updates
   const handleSave = async () => {
     try {
-      const response = await axios.put(`http://localhost:8080/tasks/${id}`, formData);
+      const response = await axios.put(`${apiUrl}/tasks/${id}`, formData);
       setTask(response.data);
       setIsEditing(false);
     } catch (error) {
@@ -57,7 +57,7 @@ const ViewTask = () => {
   // Handle delete task
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/tasks/${id}`);
+      await axios.delete(`${apiUrl}/tasks/${id}`);
       navigate('/home'); // Redirect after deletion to "/home"
     } catch (error) {
       console.error('Error deleting task:', error);
