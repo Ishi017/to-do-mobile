@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "../Styles/ViewTask.css";
 import Back from "../assets/back.svg";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const ViewTask = () => {
   const { id } = useParams(); // Get task ID from URL
@@ -20,7 +21,7 @@ const ViewTask = () => {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/tasks/${id}`);
+        const response = await axios.get(`${apiUrl}/tasks`);
         setTask(response.data);
         setFormData({
           title: response.data.title,

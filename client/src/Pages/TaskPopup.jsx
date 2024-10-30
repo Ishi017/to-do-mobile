@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../Styles/TaskPopup.css';
 import Cross from "../assets/cross.svg";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const TaskPopup = ({ isOpen, onClose }) => {
     const [taskDetails, setTaskDetails] = useState({
@@ -56,7 +57,7 @@ const TaskPopup = ({ isOpen, onClose }) => {
         console.log('Task to send:', taskToSend);
     
         try {
-            const response = await fetch('http://localhost:8080/tasks', {
+            const response = await fetch(`${apiUrl}/tasks`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

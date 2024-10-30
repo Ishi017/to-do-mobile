@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../Styles/AllTasks.css'; 
 import Back from "../assets/back.svg";
 import { Link } from "react-router-dom";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const AllTasks = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,7 +12,7 @@ const AllTasks = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://localhost:8080/tasks');
+        const response = await fetch(`${apiUrl}/tasks`);
         const data = await response.json();
         setTasks(data);
       } catch (error) {
