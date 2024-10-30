@@ -53,7 +53,7 @@ const Reminder = () => {
           <div className="task-icon">
             <img src={Completed} alt="Task Complete" />
           </div>
-          <span className="task-complete-text">Task Complete</span>
+          <span className="task-complete-text">Task Completed</span>
         </div>
         <div className="task-complete-details">
           <span className="task-count">{completedCount}</span>

@@ -25,9 +25,8 @@ const TaskList = () => {
 
     fetchTasks();
   }, []);
-  console.log("API URL:", import.meta.env.VITE_API_URL);
 
-  
+  // Handle the click on the edit button
   const handleEditClick = (task) => {
     setEditTaskId(task._id);
     const formattedDateTime = new Date(task.dateTime).toISOString().slice(0, 16);
@@ -38,33 +37,30 @@ const TaskList = () => {
     });
   };
 
-  const handleEditChange = (e) => {
-    const { name, value } = e.target;
-    setEditedTask((prevTask) => ({ ...prevTask, [name]: value }));
-  };
-
-  const handleEditSubmit = async (e) => {
-    e.preventDefault();
+  // Handle save after editing
+  const handleEditSubmit = async () => {
     try {
-      const response = await axios.put(`${API_URL}/tasks/${editTaskId}`, editedTask);
+      await axios.put(`${API_URL}/tasks/${editTaskId}`, editedTask);
       setTasks((prevTasks) =>
-        prevTasks.map((task) => (task._id === editTaskId ? response.data : task))
+        prevTasks.map((task) => (task._id === editTaskId ? { ...task, ...editedTask } : task))
       );
-      setEditTaskId(null); // Reset the edit state
+      setEditTaskId(null); // Close edit mode
     } catch (error) {
-      console.error("Error updating task:", error);
+      console.error("Error saving task:", error);
     }
   };
 
+  // Handle delete
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API_URL}/tasks/${id}`);
-      setTasks(tasks.filter(task => task._id !== id)); // Update the state after deletion
+      setTasks(tasks.filter(task => task._id !== id));
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
 
+  // Handle status change with checkbox
   const handleCheckboxChange = async (task) => {
     const updatedStatus = task.status === "Completed" ? "Open" : "Completed";
     try {
@@ -77,10 +73,8 @@ const TaskList = () => {
     }
   };
 
-  // Get the current date in 'YYYY-MM-DD' format
+  // Filter tasks for today's date
   const currentDate = new Date().toISOString().slice(0, 10);
-
-  // Filter tasks to only include those that match the current date
   const filteredTasks = tasks.filter(task => 
     new Date(task.dateTime).toISOString().slice(0, 10) === currentDate
   );
@@ -95,63 +89,61 @@ const TaskList = () => {
       </div>
       <div className="task-list">
         {filteredTasks.length > 0 ? (
-          filteredTasks.map((task) => (  
+          filteredTasks.map((task) => (
             <div key={task._id} className={`task-item ${task.status === "Completed" ? "task-done" : "tasklist-pending"}`}>
               {editTaskId === task._id ? (
-                <form onSubmit={handleEditSubmit} className="edit-form">
+                // Editable form when in edit mode
+                <div className="edit-form">
                   <input
                     type="text"
-                    name="title"
                     value={editedTask.title}
-                    onChange={handleEditChange}
-                    required
+                    onChange={(e) => setEditedTask({ ...editedTask, title: e.target.value })}
+                    className="edit-input"
                   />
-                  <textarea
-                    name="description"
+                  <input
+                    type="text"
                     value={editedTask.description}
-                    onChange={handleEditChange}
-                    required
+                    onChange={(e) => setEditedTask({ ...editedTask, description: e.target.value })}
+                    className="edit-input"
                   />
                   <input
                     type="datetime-local"
-                    name="dateTime"
                     value={editedTask.dateTime}
-                    onChange={handleEditChange}
-                    required
+                    onChange={(e) => setEditedTask({ ...editedTask, dateTime: e.target.value })}
+                    className="edit-input"
                   />
-                  <button type="submit">Save</button>
-                  <button type="button" onClick={() => setEditTaskId(null)}>Cancel</button>
-                </form>
+                  <button onClick={handleEditSubmit} className="save-button">Save</button>
+                  <button onClick={() => setEditTaskId(null)} className="cancel-button">Cancel</button>
+                </div>
               ) : (
-                <>
-                  <div className="task-content">
-                    <input
-                      type="checkbox"
-                      checked={task.status === "Completed"}
-                      onChange={() => handleCheckboxChange(task)}
-                      className="task-checkbox" 
-                    />
-                    <div className={`task-name ${task.status === "Completed" ? "task-done-name" : ""}`}>
-                      {task.title}
-                    </div>
-                  </div>
-                  <div className="edit-trash">
-                    <img
-                      src={Edit}
-                      alt="Edit"
-                      className="edit"
-                      onClick={() => handleEditClick(task)}
-                    />
-                    <img
-                      src={Delete}
-                      alt="Delete"
-                      className="trash-2"
-                      onClick={() => handleDelete(task._id)}
-                    />
-                  </div>
-                  <div className="line-1"></div>
-                </>
+                // Regular task display when not editing
+                <div className="task-content">
+                  <input
+                    type="checkbox"
+                    checked={task.status === "Completed"}
+                    onChange={() => handleCheckboxChange(task)}
+                    className="task-checkbox"
+                  />
+                  <Link to={`/view-task/${task._id}`} className={`task-name ${task.status === "Completed" ? "task-done-name" : ""}`}>
+                    {task.title}
+                  </Link>
+                </div>
               )}
+              <div className="edit-trash">
+                <img
+                  src={Edit}
+                  alt="Edit"
+                  className="edit"
+                  onClick={() => handleEditClick(task)}
+                />
+                <img
+                  src={Delete}
+                  alt="Delete"
+                  className="trash-2"
+                  onClick={() => handleDelete(task._id)}
+                />
+              </div>
+              <div className="line-1"></div>
             </div>
           ))
         ) : (

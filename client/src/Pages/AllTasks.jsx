@@ -119,21 +119,22 @@ const AllTasks = () => {
       ) : (
         <div className="task-list-container">
           {filteredTasks.map(task => (
-            <div key={task._id} className={`task-item ${task.status === "Completed" ? 'task-done' : ''}`}>
-              <div className="alltasks-listnames">
-                <input 
-                  type="checkbox" 
-                  checked={task.status === "Completed"} 
-                  onChange={() => handleCheckboxChange(task._id, task.status)} 
-                  className="task-checkbox" 
-                />
-                <span className={`task-name-all-tasks ${task.status === "Completed" ? 'line-through' : ''}`}>
-                  {task.title}
-                </span>
-              </div>
-              <div className="task-divider"></div>
-            </div>
-          ))}
+  <div key={task._id} className={`task-item ${task.status === "Completed" ? 'task-done' : ''}`}>
+    <div className="alltasks-listnames">
+      <input 
+        type="checkbox" 
+        checked={task.status === "Completed"} 
+        onChange={() => handleCheckboxChange(task._id, task.status)} 
+        className="task-checkbox" 
+      />
+      {/* Wrap task title in Link */}
+      <Link to={`/view-task/${task._id}`} className={`task-name-all-tasks ${task.status === "Completed" ? 'line-through' : ''}`}>
+        {task.title}
+      </Link>
+    </div>
+    <div className="task-divider"></div>
+  </div>
+))}
         </div>
       )}
     </div>

@@ -12,9 +12,9 @@ const Home = () => {
           <h2>Manage What To Do</h2>
           <p>The best way to manage what you have to do, don't forget your plans</p>
 
-          <div className="home-button">
-          <Link to="/home" ><button type="button" >Get Started</button></Link>
-         </div>
+          <Link to="/home" ><div className="home-button">
+          <button type="button" >Get Started</button>
+         </div></Link>
 
           </div>
           <div className="vect1"><img src={home1} alt="" /> </div>
