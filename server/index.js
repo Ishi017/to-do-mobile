@@ -4,6 +4,7 @@ import methodOverride from "method-override";
 import dotenv from "dotenv"; 
 import Task from "./models/taskModel.js";
 import cors from "cors"; 
+const frontendUrl = process.env.FRONTEND_URL;
 
 dotenv.config(); 
 
@@ -18,9 +19,12 @@ app.use(methodOverride('_method'));
 
 app.use(
     cors({
-      origin: '*',
-    //   credentials: true,
-    }))
+        origin: frontendUrl, 
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    })
+);
+
 
 async function main() {
     try {
