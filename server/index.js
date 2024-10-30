@@ -5,17 +5,26 @@ import dotenv from "dotenv";
 import Task from "./models/taskModel.js";
 import cors from "cors"; 
 
+
+
 dotenv.config(); 
+
+
 
 const app = express();
 const port = 8080;
 
 const dbUrl = process.env.ATLASDB_URL;
 
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 app.use(methodOverride('_method'));
+
+app.use(
+    cors({
+      origin: process.env.FRONTEND_LINK,
+      credentials: true,
+    }))
 
 async function main() {
     try {
